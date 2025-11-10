@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type UploadLifecycle = 'idle' | 'uploading' | 'processing' | 'completed' | 'failed';
 
@@ -15,10 +15,14 @@ interface VideoUploaderProps {
 function VideoUploader({ onUpload, onReset, status, progress, activeFileName, threshold, onThresholdChange }: VideoUploaderProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (status === 'idle') {
       setSelectedFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   }, [status]);
 
@@ -39,18 +43,17 @@ function VideoUploader({ onUpload, onReset, status, progress, activeFileName, th
   };
 
   const handleSubmit = () => {
-    if (status === 'completed') {
+    if (isBusy) {
+      return;
+    }
+
+    if (selectedFile) {
+      onUpload(selectedFile);
+      return;
+    }
+
+    if (status === 'completed' || status === 'failed') {
       onReset();
-      return;
-    }
-
-    if (status === 'failed' && selectedFile) {
-      onUpload(selectedFile);
-      return;
-    }
-
-    if (!isBusy && selectedFile) {
-      onUpload(selectedFile);
     }
   };
 
@@ -106,6 +109,7 @@ function VideoUploader({ onUpload, onReset, status, progress, activeFileName, th
           accept="video/*"
           onChange={handleFileChange}
           disabled={isBusy}
+          ref={fileInputRef}
         />
         <label htmlFor="videoFile">
           {currentFile ? (

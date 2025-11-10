@@ -53,6 +53,7 @@ function App() {
     setStatus('uploading');
     setError(null);
     setUploadProgress(0);
+    setImages([]);
     setFileName(file.name);
     setSubmittedThreshold(threshold);
 
