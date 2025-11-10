@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]       # ASGI sunucusu (FastAPI'ı çalıştırmak için)
+python-multipart      # Dosya yüklemeleri için şart
+scenedetect             # Ana kütüphanemiz
+opencv-python-headless  # Video işleme için (arayüzsüz)
+aiofiles                # Asenkron dosya işlemleri için

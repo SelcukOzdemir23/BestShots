@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Environment
+.env
+.env.*
+.python-version
+
+# FastAPI runtime artifacts
+backend/app/uploads/
+backend/app/static/*.png
+backend/app/static/*.jpg
+backend/app/static/*.jpeg
+backend/app/static/*.webp
+backend/app/static/*.gif
+backend/app/static/tmp/
+
+# Windows path artifact from editor sync
+Users/
+
+# Node / Vite
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
